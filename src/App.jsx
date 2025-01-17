@@ -73,41 +73,41 @@
 // export default App;
 
 //             **************  UseRef ******************
-import React, { useEffect, useRef, useState } from "react";
-import "./App.css";
+// import React, { useEffect, useRef, useState } from "react";
+// import "./App.css";
 
-const App = () => {
-  const [value, setValue] = useState(0);
-  //const [count, setCount] = useState(0);
-  const count = useRef(0);
-  console.log(count);
+// const App = () => {
+//   const [value, setValue] = useState(0);
+//   //const [count, setCount] = useState(0);
+//   const count = useRef(0);
+//   console.log(count);
 
-  useEffect(() => {
-    count.current = count.current + 1;
-  });
-  return (
-    <>
-      <button
-        onClick={() => {
-          setValue((prev) => prev - 1);
-        }}
-      >
-        -1
-      </button>
-      <h1>{value}</h1>
-      <button
-        onClick={() => {
-          setValue((prev) => prev + 1);
-        }}
-      >
-        +1
-      </button>
-      <h1>Render Count : {count.current}</h1>
-    </>
-  );
-};
+//   useEffect(() => {
+//     count.current = count.current + 1;
+//   });
+//   return (
+//     <>
+//       <button
+//         onClick={() => {
+//           setValue((prev) => prev - 1);
+//         }}
+//       >
+//         -1
+//       </button>
+//       <h1>{value}</h1>
+//       <button
+//         onClick={() => {
+//           setValue((prev) => prev + 1);
+//         }}
+//       >
+//         +1
+//       </button>
+//       <h1>Render Count : {count.current}</h1>
+//     </>
+//   );
+// };
 
-export default App;
+// export default App;
 
 // const App = () => {
 //   const inputElement = useRef();
@@ -126,3 +126,43 @@ export default App;
 // };
 
 // export default App;
+
+//       **************     use Memo Hook  ****************
+import React, { useMemo, useState } from "react";
+import "./App.css";
+
+const App = () => {
+  const [number, setNumber] = useState(0);
+  const [counter, setCounter] = useState(0);
+
+  function cubeNum(num) {
+    console.log("Calculation Done!");
+    return Math.pow(num, 3);
+  }
+
+  const result = useMemo(() => {
+    cubeNum(number);
+  }, [number]);
+  return (
+    <>
+      <input
+        type="number"
+        value={number}
+        onChange={(e) => {
+          setNumber(e.target.value);
+        }}
+      />
+      <h1>Cube of the number : {result}</h1>
+      <button
+        onClick={() => {
+          setCounter(counter + 1);
+        }}
+      >
+        Counter ++{" "}
+      </button>
+      <h1> Counter : {counter}</h1>
+    </>
+  );
+};
+
+export default App;
