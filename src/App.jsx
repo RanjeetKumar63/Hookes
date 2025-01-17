@@ -48,26 +48,81 @@
 
 // export default App;
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
+// import "./App.css";
+
+// const App = () => {
+//   const [count, setCount] = useState(0);
+//   const [name, setName] = useState("Exotic_Coder");
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setCount((count) => count + 1);
+//     }, 2000);
+//   }, [count, name]);
+//   return (
+//     <div>
+//       <h1>
+//         I've rendered {count} {""}
+//         {name} times!
+//       </h1>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+//             **************  UseRef ******************
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("Exotic_Coder");
+  const [value, setValue] = useState(0);
+  //const [count, setCount] = useState(0);
+  const count = useRef(0);
+  console.log(count);
+
   useEffect(() => {
-    setTimeout(() => {
-      setCount((count) => count + 1);
-    }, 2000);
-  }, [count, name]);
+    count.current = count.current + 1;
+  });
   return (
-    <div>
-      <h1>
-        I've rendered {count} {""}
-        {name} times!
-      </h1>
-    </div>
+    <>
+      <button
+        onClick={() => {
+          setValue((prev) => prev - 1);
+        }}
+      >
+        -1
+      </button>
+      <h1>{value}</h1>
+      <button
+        onClick={() => {
+          setValue((prev) => prev + 1);
+        }}
+      >
+        +1
+      </button>
+      <h1>Render Count : {count.current}</h1>
+    </>
   );
 };
 
 export default App;
+
+// const App = () => {
+//   const inputElement = useRef();
+
+//   const btnClicked = () => {
+//     console.log(inputElement.current);
+//     inputElement.current.style.background = "blue";
+//   };
+
+//   return (
+//     <>
+//       <input type="text" placeholder="First Name" ref={inputElement} />
+//       <button onClick={btnClicked}>Click Here</button>
+//     </>
+//   );
+// };
+
+// export default App;
